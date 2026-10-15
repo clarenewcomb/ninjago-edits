@@ -3,20 +3,821 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ninjago Fan Edits</title>
+  <title>SPINJITZU CONFIDENTIAL | Ninjago Gossip, Rumors & Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
   <style>
-    body { background-color: #121212; color: #ffffff; font-family: Arial, sans-serif; text-align: center; padding: 40px; }
-    h1 { color: #e60012; }
-    p { color: #cccccc; }
-    .footer { margin-top: 50px; font-size: 12px; color: #777; }
+    :root {
+      --bg-dark: #0a0c10;
+      --bg-card: #121620;
+      --bg-card-hover: #1a202c;
+      --accent-red: #ff1e43;
+      --accent-gold: #ffb700;
+      --accent-cyan: #00f0ff;
+      --accent-green: #00ff66;
+      --text-main: #f0f3f8;
+      --text-muted: #8b9bb4;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --font-heading: 'Bebas Neue', sans-serif;
+      --font-sub: 'Rajdhani', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-dark); }
+    ::-webkit-scrollbar-thumb { background: var(--accent-red); border-radius: 4px; }
+
+    /* Header & Marquee */
+    header {
+      background: linear-gradient(180deg, rgba(20, 10, 25, 0.9) 0%, rgba(10, 12, 16, 0.95) 100%);
+      border-bottom: 2px solid var(--accent-red);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      letter-spacing: 2px;
+      color: #fff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo span { color: var(--accent-red); text-shadow: 0 0 12px rgba(255, 30, 67, 0.6); }
+    .badge {
+      background: var(--accent-gold);
+      color: #000;
+      font-family: var(--font-sub);
+      font-weight: 700;
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .sfx-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: var(--font-sub);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .sfx-btn:hover { background: var(--accent-red); border-color: var(--accent-red); }
+
+    /* Breaking Ticker */
+    .ticker-bar {
+      background: var(--accent-red);
+      color: #fff;
+      display: flex;
+      overflow: hidden;
+      font-family: var(--font-sub);
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .ticker-title {
+      background: #000;
+      padding: 6px 16px;
+      white-space: nowrap;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .ticker-content {
+      display: flex;
+      white-space: nowrap;
+      animation: marquee 25s linear infinite;
+      padding-top: 6px;
+    }
+    .ticker-item { margin-right: 50px; }
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-left: 4px solid var(--accent-red);
+      padding-left: 12px;
+    }
+
+    /* Navigation Tabs */
+    .nav-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 30px;
+      overflow-x: auto;
+      padding-bottom: 5px;
+    }
+    .tab-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-family: var(--font-sub);
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .tab-btn:hover, .tab-btn.active {
+      background: var(--accent-red);
+      color: #fff;
+      border-color: var(--accent-red);
+      box-shadow: 0 0 15px rgba(255, 30, 67, 0.4);
+    }
+
+    /* Gossip Feed Grid */
+    .gossip-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 25px;
+      margin-bottom: 50px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 240, 255, 0.1);
+      border-color: rgba(0, 240, 255, 0.3);
+    }
+
+    .card-header {
+      position: relative;
+      height: 180px;
+      background-size: cover;
+      background-position: center;
+    }
+    .card-category {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(10, 12, 16, 0.85);
+      border: 1px solid var(--accent-cyan);
+      color: var(--accent-cyan);
+      font-family: var(--font-sub);
+      font-weight: 700;
+      font-size: 0.75rem;
+      padding: 3px 10px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      backdrop-filter: blur(4px);
+    }
+
+    .card-body {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-title {
+      font-family: var(--font-sub);
+      font-size: 1.3rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+    .card-snippet {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border-color);
+      padding-top: 15px;
+    }
+    .reactions { display: flex; gap: 10px; }
+    .react-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .react-btn:hover { background: rgba(255, 255, 255, 0.15); }
+    .read-btn {
+      color: var(--accent-gold);
+      font-family: var(--font-sub);
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* Tea Map (Character Tracker) */
+    .character-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+      margin-bottom: 50px;
+    }
+
+    .char-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+    .char-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin: 0 auto 12px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      border: 3px solid var(--accent-gold);
+      background: #1e2430;
+    }
+    .char-name {
+      font-family: var(--font-sub);
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+    .char-status {
+      font-size: 0.8rem;
+      color: var(--accent-green);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .ego-bar-bg {
+      background: rgba(255, 255, 255, 0.1);
+      height: 8px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 8px 0 15px 0;
+    }
+    .ego-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-gold), var(--accent-red));
+      width: 50%;
+    }
+
+    /* Game Arcade Section */
+    .arcade-section {
+      background: linear-gradient(135deg, #10141e 0%, #080a0e 100%);
+      border: 2px solid var(--accent-cyan);
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 50px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.15);
+    }
+    
+    #gameCanvas {
+      background: #050608;
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      max-width: 100%;
+      height: auto;
+      cursor: crosshair;
+    }
+
+    .game-controls {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .btn-action {
+      background: var(--accent-cyan);
+      color: #000;
+      border: none;
+      padding: 12px 28px;
+      font-family: var(--font-sub);
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+    .btn-action:hover {
+      background: #fff;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.8);
+      transform: scale(1.05);
+    }
+
+    /* Modal / Article View */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      backdrop-filter: blur(8px);
+    }
+    .modal-content {
+      background: var(--bg-card);
+      border: 1px solid var(--accent-red);
+      border-radius: 12px;
+      max-width: 700px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 30px;
+      position: relative;
+    }
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 1.8rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .close-modal:hover { color: #fff; }
+
+    .comment-section {
+      margin-top: 30px;
+      border-top: 1px solid var(--border-color);
+      padding-top: 20px;
+    }
+    .comment-input-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .comment-input-group input {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      padding: 10px 15px;
+      border-radius: 6px;
+      color: #fff;
+    }
+    .comment-list { display: flex; flex-direction: column; gap: 12px; }
+    .comment-item {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 12px 16px;
+      border-radius: 8px;
+      border-left: 3px solid var(--accent-cyan);
+    }
+    .comment-author { font-weight: 700; color: var(--accent-cyan); font-size: 0.85rem; }
+
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 40px 20px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
   </style>
 </head>
 <body>
-  <h1>⚡ Spinjitzu Fan Edits ⚡</h1>
-  <p>Welcome to my fan page! Edits and wallpapers coming soon.</p>
 
-  <div class="footer">
-    This is an unofficial fan page. LEGO® and NINJAGO® are trademarks of The LEGO Group.
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <a href="#" class="logo">
+        ⚡ SPINJITZU <span>CONFIDENTIAL</span> <span class="badge">LEAKS & TEA</span>
+      </a>
+      <button class="sfx-btn" id="sfxToggle">🔊 SFX ON</button>
+    </div>
+    
+    <!-- Ticker -->
+    <div class="ticker-bar">
+      <div class="ticker-title">🚨 BREAKING TEA</div>
+      <div class="ticker-content">
+        <span class="ticker-item">🐍 SERPENTINE SPOTTED BUYING BUBBLE TEA IN NEW NINJAGO CITY!</span>
+        <span class="ticker-item">⚡ JAY ACCIDENTALLY SHORT-CIRCUITED THE MONASTERY WI-FI AGAIN!</span>
+        <span class="ticker-item">🔥 KAI CLAIMS HIS HAIR IS NATURAL (INSIDERS SAY IT TAKES 3 CANS OF SPRAY)!</span>
+        <span class="ticker-item">🍰 COLE HID THE LAST PIECE OF CAKE IN ZANE'S REFRIGERATION CORE!</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Category Nav -->
+    <div class="nav-tabs">
+      <button class="tab-btn active" onclick="filterGossip('all')">🔥 All Tea</button>
+      <button class="tab-btn" onclick="filterGossip('DRAMA')">☕ Monastery Drama</button>
+      <button class="tab-btn" onclick="filterGossip('LEAKS')">🔓 Classified Leaks</button>
+      <button class="tab-btn" onclick="filterGossip('THEORIES')">🔮 Crazy Theories</button>
+    </div>
+
+    <!-- Main Gossip Grid -->
+    <h2 class="section-title">TODAY'S HOTTEST RUMORS</h2>
+    <div class="gossip-grid" id="gossipGrid">
+      <!-- Cards rendered via JS -->
+    </div>
+
+    <!-- Arcade Section -->
+    <div class="arcade-section">
+      <h2 class="section-title" style="border:none; justify-content: center; padding:0;">⚔️ SPINJITZU SLASH ARCADE</h2>
+      <p style="color: var(--text-muted); margin-bottom: 15px;">Move your blade to slice dropping villains! Don't let 3 drop or touch bombs!</p>
+      <canvas id="gameCanvas" width="700" height="380"></canvas>
+      <div class="game-controls">
+        <button class="btn-action" id="startGameBtn">Start Game ⚔️</button>
+      </div>
+    </div>
+
+    <!-- Character Status Tracker -->
+    <h2 class="section-title">NINJA TEA MAP & EGO METER</h2>
+    <div class="character-grid" id="charGrid">
+      <!-- Character cards rendered via JS -->
+    </div>
+
   </div>
+
+  <!-- Modal Article Viewer -->
+  <div class="modal" id="articleModal">
+    <div class="modal-content">
+      <span class="close-modal" id="closeModal">&times;</span>
+      <h2 id="modalTitle" style="font-family: var(--font-sub); font-size: 1.8rem; margin-bottom: 10px; color: var(--accent-gold);">Article Title</h2>
+      <div id="modalBody" style="color: var(--text-main); font-size: 1rem; margin-bottom: 20px;">Body text...</div>
+      
+      <!-- Interactive Comment Section -->
+      <div class="comment-section">
+        <h3 style="font-family: var(--font-sub); margin-bottom: 15px; color: var(--accent-cyan);">Spill Your Thoughts (Comments)</h3>
+        <div class="comment-input-group">
+          <input type="text" id="commentName" placeholder="Your Ninja Name...">
+          <input type="text" id="commentText" placeholder="Spill the tea...">
+          <button class="btn-action" style="padding: 8px 16px; font-size: 0.9rem;" onclick="addComment()">Post</button>
+        </div>
+        <div class="comment-list" id="commentList"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>This is an unofficial fan page. LEGO®, NINJAGO®, and the Minifigure are trademarks of The LEGO Group, which does not sponsor, authorize, or endorse this website.</p>
+  </footer>
+
+  <script>
+    // Audio Synthesizer (Web Audio API)
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+    let sfxEnabled = true;
+
+    function playSound(type) {
+      if (!sfxEnabled) return;
+      if (!audioCtx) audioCtx = new AudioCtx();
+      
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (type === 'slash') {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.1);
+        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.1);
+      } else if (type === 'score') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+        osc.frequency.setValueAtTime(880, audioCtx.currentTime + 0.08);
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.2);
+      }
+    }
+
+    document.getElementById('sfxToggle').addEventListener('click', function() {
+      sfxEnabled = !sfxEnabled;
+      this.innerText = sfxEnabled ? "🔊 SFX ON" : "🔇 SFX OFF";
+    });
+
+    // Gossip Data
+    const gossipData = [
+      {
+        id: 1,
+        title: "LEAK: Kai's Haircare Routine Costs 500,000 Studs Per Year?",
+        category: "DRAMA",
+        snippet: "Insiders report that Kai refuses to enter battle unless his spiked hair is fully locked in place with ultra-hold elemental gel.",
+        full: "Monastery leaks confirm Kai spends up to 2 hours every morning crafting his iconic spike style. Cole complained about the fumes, leading to a minor elemental fire in the bathroom last Tuesday.",
+        teaVotes: 42,
+        fakeVotes: 3,
+        bg: "linear-gradient(135deg, #ff1e43, #800010)"
+      },
+      {
+        id: 2,
+        title: "Is Jay Secretly Running an Underground Prime Empire Server?",
+        category: "LEAKS",
+        snippet: "Mysterious midnight data spikes from the Monastery garage suggest Jay has revived Unagami's old gaming code.",
+        full: "Zane detected an illegal high-bandwidth connection bypassing Nindroid security protocols. Jay claims he was 'just downloading speedruns', but encrypted chats show custom avatar skins!",
+        teaVotes: 89,
+        fakeVotes: 1,
+        bg: "linear-gradient(135deg, #00f0ff, #004080)"
+      },
+      {
+        id: 3,
+        title: "Zane's Memory Drive Leaked: 'Pink Ninja' Folder Discovered",
+        category: "THEORIES",
+        snippet: "During a routine system backup, Pixal uncovered an archived folder containing high-def pictures of the legendary Pink Ninja suit.",
+        full: "Fans are asking: Will the Pink Ninja ever return to action? Zane refused to comment when confronted at breakfast, simply stating his laundry processor had malfunctioned.",
+        teaVotes: 120,
+        fakeVotes: 4,
+        bg: "linear-gradient(135deg, #ffb700, #996e00)"
+      }
+    ];
+
+    let currentArticleId = null;
+
+    function renderGossip(filter = 'all') {
+      const grid = document.getElementById('gossipGrid');
+      grid.innerHTML = '';
+      
+      const filtered = filter === 'all' ? gossipData : gossipData.filter(item => item.category === filter);
+      
+      filtered.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="card-header" style="background: ${item.bg}">
+            <div class="card-category">${item.category}</div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">${item.title}</div>
+            <div class="card-snippet">${item.snippet}</div>
+            <div class="card-footer">
+              <div class="reactions">
+                <button class="react-btn" onclick="voteTea(${item.id})">☕ <span id="tea-${item.id}">${item.teaVotes}</span></button>
+                <button class="react-btn" onclick="voteFake(${item.id})">🚫 <span id="fake-${item.id}">${item.fakeVotes}</span></button>
+              </div>
+              <span class="read-btn" onclick="openModal(${item.id})">Read Tea &rarr;</span>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function filterGossip(cat) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      renderGossip(cat);
+    }
+
+    function voteTea(id) {
+      playSound('score');
+      const item = gossipData.find(x => x.id === id);
+      if (item) {
+        item.teaVotes++;
+        document.getElementById(`tea-${id}`).innerText = item.teaVotes;
+      }
+    }
+
+    function voteFake(id) {
+      playSound('slash');
+      const item = gossipData.find(x => x.id === id);
+      if (item) {
+        item.fakeVotes++;
+        document.getElementById(`fake-${id}`).innerText = item.fakeVotes;
+      }
+    }
+
+    // Modal & Comments
+    function openModal(id) {
+      currentArticleId = id;
+      const item = gossipData.find(x => x.id === id);
+      document.getElementById('modalTitle').innerText = item.title;
+      document.getElementById('modalBody').innerText = item.full;
+      document.getElementById('articleModal').style.display = 'flex';
+      renderComments();
+    }
+
+    document.getElementById('closeModal').onclick = () => {
+      document.getElementById('articleModal').style.display = 'none';
+    };
+
+    function renderComments() {
+      const list = document.getElementById('commentList');
+      const comments = JSON.parse(localStorage.getItem(`comments_${currentArticleId}`) || '[]');
+      list.innerHTML = comments.length === 0 ? '<p style="color:var(--text-muted);">No comments yet. Be the first to spill tea!</p>' : '';
+      comments.forEach(c => {
+        const div = document.createElement('div');
+        div.className = 'comment-item';
+        div.innerHTML = `<div class="comment-author">${escapeHtml(c.name)}</div><div>${escapeHtml(c.text)}</div>`;
+        list.appendChild(div);
+      });
+    }
+
+    function addComment() {
+      const name = document.getElementById('commentName').value.trim() || 'Anonymous Ninja';
+      const text = document.getElementById('commentText').value.trim();
+      if (!text) return;
+      
+      const comments = JSON.parse(localStorage.getItem(`comments_${currentArticleId}`) || '[]');
+      comments.push({ name, text });
+      localStorage.setItem(`comments_${currentArticleId}`, JSON.stringify(comments));
+      
+      document.getElementById('commentText').value = '';
+      renderComments();
+      playSound('score');
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+    }
+
+    // Character Map Data
+    const charData = [
+      { name: "Kai 🔥", status: "Styling Hair", ego: 95, icon: "⚔️" },
+      { name: "Jay ⚡", status: "Rage-Quitting Gaming", ego: 80, icon: "🎮" },
+      { name: "Zane ❄️", status: "Updating Firmware", ego: 40, icon: "🤖" },
+      { name: "Cole 🪨", status: "Eating Whole Cake", ego: 65, icon: "🍰" },
+      { name: "Lloyd 🟢", status: "In Master Training", ego: 70, icon: "🐉" },
+      { name: "Dareth 🤎", status: "Claiming He Is 7th Ninja", ego: 100, icon: "🏆" }
+    ];
+
+    function renderChars() {
+      const grid = document.getElementById('charGrid');
+      grid.innerHTML = '';
+      charData.forEach(c => {
+        grid.innerHTML += `
+          <div class="char-card">
+            <div class="char-avatar">${c.icon}</div>
+            <div class="char-name">${c.name}</div>
+            <div class="char-status">📍 ${c.status}</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted)">Ego Level: ${c.ego}%</div>
+            <div class="ego-bar-bg">
+              <div class="ego-bar-fill" style="width: ${c.ego}%"></div>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    // Arcade Game Engine
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    let gameRunning = false;
+    let score = 0;
+    let lives = 3;
+    let targets = [];
+
+    const villainTypes = ['🐍', '🤖', '👻', '💣'];
+
+    document.getElementById('startGameBtn').onclick = () => {
+      score = 0;
+      lives = 3;
+      targets = [];
+      gameRunning = true;
+      playSound('score');
+      spawnTarget();
+    };
+
+    function spawnTarget() {
+      if (!gameRunning) return;
+      const type = villainTypes[Math.floor(Math.random() * villainTypes.length)];
+      targets.push({
+        x: Math.random() * (canvas.width - 60) + 30,
+        y: canvas.height + 30,
+        vy: - (Math.random() * 4 + 7),
+        vx: (Math.random() - 0.5) * 3,
+        type: type,
+        radius: 25
+      });
+      setTimeout(spawnTarget, Math.random() * 1000 + 800);
+    }
+
+    canvas.addEventListener('mousemove', (e) => {
+      if (!gameRunning) return;
+      const rect = canvas.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+
+      targets.forEach((t, index) => {
+        const dist = Math.hypot(t.x - mouseX, t.y - mouseY);
+        if (dist < t.radius) {
+          if (t.type === '💣') {
+            lives--;
+            playSound('slash');
+            if (lives <= 0) gameRunning = false;
+          } else {
+            score += 100;
+            playSound('slash');
+          }
+          targets.splice(index, 1);
+        }
+      });
+    });
+
+    function gameLoop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (gameRunning) {
+        targets.forEach((t, i) => {
+          t.x += t.vx;
+          t.y += t.vy;
+          t.vy += 0.15; // Gravity
+
+          ctx.font = '30px serif';
+          ctx.textAlign = 'center';
+          ctx.fillText(t.type, t.x, t.y);
+
+          if (t.y > canvas.height + 50) {
+            targets.splice(i, 1);
+            if (t.type !== '💣') lives--;
+            if (lives <= 0) gameRunning = false;
+          }
+        });
+
+        // HUD
+        ctx.fillStyle = '#00f0ff';
+        ctx.font = 'bold 20px Rajdhani';
+        ctx.textAlign = 'left';
+        ctx.fillText(`SCORE: ${score}`, 20, 35);
+        ctx.fillText(`LIVES: ${'❤️'.repeat(Math.max(0, lives))}`, 20, 65);
+      } else {
+        ctx.fillStyle = '#ff1e43';
+        ctx.font = 'bold 32px Bebas Neue';
+        ctx.textAlign = 'center';
+        ctx.fillText(score > 0 ? `GAME OVER! FINAL SCORE: ${score}` : "CLICK 'START GAME' TO SLICE VILLAINS!", canvas.width / 2, canvas.height / 2);
+      }
+
+      requestAnimationFrame(gameLoop);
+    }
+
+    // Init Page
+    renderGossip();
+    renderChars();
+    gameLoop();
+  </script>
 </body>
 </html>
