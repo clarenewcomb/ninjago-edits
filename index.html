@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SPINJITZU CONFIDENTIAL | Ninjago Gossip, Rumors & Arcade</title>
+  <title>SPINJITZU CONFIDENTIAL | Ninjago Gossip, Card Collector & Arcade</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
@@ -16,6 +16,7 @@
       --accent-gold: #ffb700;
       --accent-cyan: #00f0ff;
       --accent-green: #00ff66;
+      --accent-purple: #9d00ff;
       --text-main: #f0f3f8;
       --text-muted: #8b9bb4;
       --border-color: rgba(255, 255, 255, 0.08);
@@ -273,58 +274,98 @@
       cursor: pointer;
     }
 
-    /* Tea Map (Character Tracker) */
-    .character-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 20px;
+    /* Card Collector Gacha Section */
+    .gacha-section {
+      background: linear-gradient(135deg, #181124 0%, #0c0814 100%);
+      border: 2px solid var(--accent-purple);
+      border-radius: 16px;
+      padding: 30px;
       margin-bottom: 50px;
+      box-shadow: 0 0 30px rgba(157, 0, 255, 0.2);
     }
 
-    .char-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
+    .gacha-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .gacha-pack-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px dashed var(--accent-purple);
       border-radius: 12px;
-      padding: 20px;
+      padding: 30px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .btn-action {
+      background: var(--accent-cyan);
+      color: #000;
+      border: none;
+      padding: 12px 28px;
+      font-family: var(--font-sub);
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+    .btn-action:hover {
+      background: #fff;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.8);
+      transform: scale(1.05);
+    }
+
+    .btn-purple {
+      background: var(--accent-purple);
+      color: #fff;
+    }
+    .btn-purple:hover {
+      background: #d000ff;
+      box-shadow: 0 0 25px rgba(208, 0, 255, 0.8);
+    }
+
+    .binder-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+    }
+
+    .ninja-card {
+      background: var(--bg-card);
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      padding: 15px;
       text-align: center;
       position: relative;
+      transition: transform 0.3s, box-shadow 0.3s;
     }
-    .char-avatar {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      margin: 0 auto 12px auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.2rem;
-      border: 3px solid var(--accent-gold);
-      background: #1e2430;
+    .ninja-card.locked {
+      filter: grayscale(1) opacity(0.4);
     }
-    .char-name {
-      font-family: var(--font-sub);
-      font-size: 1.4rem;
-      font-weight: 700;
+    .ninja-card:hover:not(.locked) {
+      transform: translateY(-8px) scale(1.03);
     }
-    .char-status {
-      font-size: 0.8rem;
-      color: var(--accent-green);
-      margin-bottom: 12px;
-      text-transform: uppercase;
-      font-weight: 600;
+
+    .ninja-card.rarity-Common { border-color: #8b9bb4; }
+    .ninja-card.rarity-Rare { border-color: var(--accent-cyan); box-shadow: 0 0 10px rgba(0, 240, 255, 0.2); }
+    .ninja-card.rarity-Legendary { border-color: var(--accent-gold); box-shadow: 0 0 15px rgba(255, 183, 0, 0.4); }
+    .ninja-card.rarity-Mythic { border-color: var(--accent-purple); box-shadow: 0 0 20px rgba(157, 0, 255, 0.6); animation: mythicPulse 2s infinite alternate; }
+
+    @keyframes mythicPulse {
+      0% { box-shadow: 0 0 10px rgba(157, 0, 255, 0.5); }
+      100% { box-shadow: 0 0 25px rgba(255, 30, 67, 0.8); }
     }
-    .ego-bar-bg {
-      background: rgba(255, 255, 255, 0.1);
-      height: 8px;
-      border-radius: 4px;
-      overflow: hidden;
-      margin: 8px 0 15px 0;
-    }
-    .ego-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--accent-gold), var(--accent-red));
-      width: 50%;
-    }
+
+    .card-icon { font-size: 3rem; margin-bottom: 10px; }
+    .card-name { font-family: var(--font-sub); font-weight: 700; font-size: 1.1rem; }
+    .card-rarity { font-size: 0.75rem; text-transform: uppercase; font-weight: 700; margin-bottom: 8px; }
+    .card-stats { font-size: 0.8rem; color: var(--text-muted); display: flex; justify-content: space-around; margin-top: 8px; }
 
     /* Game Arcade Section */
     .arcade-section {
@@ -347,33 +388,27 @@
       cursor: crosshair;
     }
 
-    .game-controls {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 15px;
+    /* Live Comment Box Styling Override for HTML Comment Box */
+    .live-discussion-section {
+      background: var(--bg-card);
+      border: 2px solid var(--accent-gold);
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 50px;
     }
 
-    .btn-action {
-      background: var(--accent-cyan);
-      color: #000;
-      border: none;
-      padding: 12px 28px;
-      font-family: var(--font-sub);
-      font-size: 1.1rem;
-      font-weight: 700;
-      border-radius: 8px;
-      cursor: pointer;
-      text-transform: uppercase;
-      transition: all 0.2s;
+    #HCB_comment_box {
+      color: var(--text-main) !important;
+      font-family: var(--font-body) !important;
     }
-    .btn-action:hover {
-      background: #fff;
-      box-shadow: 0 0 20px rgba(0, 240, 255, 0.8);
-      transform: scale(1.05);
+    #HCB_comment_box textarea, #HCB_comment_box input {
+      background: rgba(255, 255, 255, 0.05) !important;
+      border: 1px solid var(--border-color) !important;
+      color: #fff !important;
+      border-radius: 6px !important;
     }
 
-    /* Modal / Article View */
+    /* Modal Article View */
     .modal {
       display: none;
       position: fixed;
@@ -406,33 +441,6 @@
     }
     .close-modal:hover { color: #fff; }
 
-    .comment-section {
-      margin-top: 30px;
-      border-top: 1px solid var(--border-color);
-      padding-top: 20px;
-    }
-    .comment-input-group {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-    .comment-input-group input {
-      flex: 1;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-color);
-      padding: 10px 15px;
-      border-radius: 6px;
-      color: #fff;
-    }
-    .comment-list { display: flex; flex-direction: column; gap: 12px; }
-    .comment-item {
-      background: rgba(255, 255, 255, 0.03);
-      padding: 12px 16px;
-      border-radius: 8px;
-      border-left: 3px solid var(--accent-cyan);
-    }
-    .comment-author { font-weight: 700; color: var(--accent-cyan); font-size: 0.85rem; }
-
     footer {
       border-top: 1px solid var(--border-color);
       padding: 40px 20px;
@@ -448,7 +456,7 @@
   <header>
     <div class="header-container">
       <a href="#" class="logo">
-        ⚡ SPINJITZU <span>CONFIDENTIAL</span> <span class="badge">LEAKS & TEA</span>
+        ⚡ SPINJITZU <span>CONFIDENTIAL</span> <span class="badge">LEAKS & CARDS</span>
       </a>
       <button class="sfx-btn" id="sfxToggle">🔊 SFX ON</button>
     </div>
@@ -477,24 +485,54 @@
 
     <!-- Main Gossip Grid -->
     <h2 class="section-title">TODAY'S HOTTEST RUMORS</h2>
-    <div class="gossip-grid" id="gossipGrid">
-      <!-- Cards rendered via JS -->
+    <div class="gossip-grid" id="gossipGrid"></div>
+
+    <!-- Card Collector Gacha Section -->
+    <div class="gacha-section">
+      <div class="gacha-header">
+        <h2 class="section-title" style="border:none; padding:0; margin:0; color: var(--accent-purple);">🎴 NINJAGO CARD BINDER & GACHA</h2>
+        <div style="font-family: var(--font-sub); font-weight: 700; font-size: 1.2rem;" id="collectionCounter">
+          COLLECTED: 0 / 12 (0%)
+        </div>
+      </div>
+
+      <div class="gacha-pack-box">
+        <h3 style="font-family: var(--font-sub); font-size: 1.8rem; margin-bottom: 10px;">SUMMON ELEMENTAL BOOSTER PACK</h3>
+        <p style="color: var(--text-muted); margin-bottom: 20px;">Draw a free booster pack to unlock rare Ninjago elemental character cards!</p>
+        <button class="btn-action btn-purple" onclick="openBoosterPack()">Open Booster Pack 🔮</button>
+      </div>
+
+      <h3 style="font-family: var(--font-sub); font-size: 1.4rem; margin-bottom: 15px; color: var(--accent-gold);">YOUR CARD BINDER</h3>
+      <div class="binder-grid" id="binderGrid"></div>
     </div>
 
     <!-- Arcade Section -->
     <div class="arcade-section">
       <h2 class="section-title" style="border:none; justify-content: center; padding:0;">⚔️ SPINJITZU SLASH ARCADE</h2>
-      <p style="color: var(--text-muted); margin-bottom: 15px;">Move your blade to slice dropping villains! Don't let 3 drop or touch bombs!</p>
+      <p style="color: var(--text-muted); margin-bottom: 15px;">Move your mouse/finger to slice dropping villains! Don't let 3 drop or touch bombs!</p>
       <canvas id="gameCanvas" width="700" height="380"></canvas>
-      <div class="game-controls">
+      <div style="margin-top: 15px;">
         <button class="btn-action" id="startGameBtn">Start Game ⚔️</button>
       </div>
     </div>
 
-    <!-- Character Status Tracker -->
-    <h2 class="section-title">NINJA TEA MAP & EGO METER</h2>
-    <div class="character-grid" id="charGrid">
-      <!-- Character cards rendered via JS -->
+    <!-- Live Discussions Section (HTML Comment Box - Option 2) -->
+    <div class="live-discussion-section">
+      <h2 class="section-title" style="color: var(--accent-gold);">💬 PUBLIC RUMOR MILL & DEBATE ARENA</h2>
+      <p style="color: var(--text-muted); margin-bottom: 25px;">Spill the tea, start debates, and respond to other fans live in real-time!</p>
+      
+      <!-- HTML Comment Box Code -->
+      <div id="HCB_comment_box"><a href="http://www.htmlcommentbox.com">Comment Box</a> is loading comments...</div>
+      <link rel="stylesheet" type="text/css" href="https://www.htmlcommentbox.com/static/page-min.css" />
+      <script type="text/javascript" id="hcb">
+        if(!window.hcb_user){hcb_user={};}
+        (function(){
+          var s=document.createElement("script"), l=hcb_user.PAGE || (""+window.location).replace(/'/g,"%27"), h="https://www.htmlcommentbox.com";
+          s.setAttribute("type","text/javascript");
+          s.setAttribute("src", h+"/jread?page="+encodeURIComponent(l).replace("+","%20")+"&mod=%241%24wq1501%24&opts=16798&num=10&ts=1");
+          if (typeof s!="undefined") document.getElementsByTagName("head")[0].appendChild(s);
+        })();
+      </script>
     </div>
 
   </div>
@@ -505,17 +543,6 @@
       <span class="close-modal" id="closeModal">&times;</span>
       <h2 id="modalTitle" style="font-family: var(--font-sub); font-size: 1.8rem; margin-bottom: 10px; color: var(--accent-gold);">Article Title</h2>
       <div id="modalBody" style="color: var(--text-main); font-size: 1rem; margin-bottom: 20px;">Body text...</div>
-      
-      <!-- Interactive Comment Section -->
-      <div class="comment-section">
-        <h3 style="font-family: var(--font-sub); margin-bottom: 15px; color: var(--accent-cyan);">Spill Your Thoughts (Comments)</h3>
-        <div class="comment-input-group">
-          <input type="text" id="commentName" placeholder="Your Ninja Name...">
-          <input type="text" id="commentText" placeholder="Spill the tea...">
-          <button class="btn-action" style="padding: 8px 16px; font-size: 0.9rem;" onclick="addComment()">Post</button>
-        </div>
-        <div class="comment-list" id="commentList"></div>
-      </div>
     </div>
   </div>
 
@@ -554,6 +581,14 @@
         gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
         osc.start();
         osc.stop(audioCtx.currentTime + 0.2);
+      } else if (type === 'legendary') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(300, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.4);
+        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.4);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.4);
       }
     }
 
@@ -595,8 +630,6 @@
         bg: "linear-gradient(135deg, #ffb700, #996e00)"
       }
     ];
-
-    let currentArticleId = null;
 
     function renderGossip(filter = 'all') {
       const grid = document.getElementById('gossipGrid');
@@ -644,180 +677,4 @@
 
     function voteFake(id) {
       playSound('slash');
-      const item = gossipData.find(x => x.id === id);
-      if (item) {
-        item.fakeVotes++;
-        document.getElementById(`fake-${id}`).innerText = item.fakeVotes;
-      }
-    }
-
-    // Modal & Comments
-    function openModal(id) {
-      currentArticleId = id;
-      const item = gossipData.find(x => x.id === id);
-      document.getElementById('modalTitle').innerText = item.title;
-      document.getElementById('modalBody').innerText = item.full;
-      document.getElementById('articleModal').style.display = 'flex';
-      renderComments();
-    }
-
-    document.getElementById('closeModal').onclick = () => {
-      document.getElementById('articleModal').style.display = 'none';
-    };
-
-    function renderComments() {
-      const list = document.getElementById('commentList');
-      const comments = JSON.parse(localStorage.getItem(`comments_${currentArticleId}`) || '[]');
-      list.innerHTML = comments.length === 0 ? '<p style="color:var(--text-muted);">No comments yet. Be the first to spill tea!</p>' : '';
-      comments.forEach(c => {
-        const div = document.createElement('div');
-        div.className = 'comment-item';
-        div.innerHTML = `<div class="comment-author">${escapeHtml(c.name)}</div><div>${escapeHtml(c.text)}</div>`;
-        list.appendChild(div);
-      });
-    }
-
-    function addComment() {
-      const name = document.getElementById('commentName').value.trim() || 'Anonymous Ninja';
-      const text = document.getElementById('commentText').value.trim();
-      if (!text) return;
-      
-      const comments = JSON.parse(localStorage.getItem(`comments_${currentArticleId}`) || '[]');
-      comments.push({ name, text });
-      localStorage.setItem(`comments_${currentArticleId}`, JSON.stringify(comments));
-      
-      document.getElementById('commentText').value = '';
-      renderComments();
-      playSound('score');
-    }
-
-    function escapeHtml(str) {
-      return str.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-    }
-
-    // Character Map Data
-    const charData = [
-      { name: "Kai 🔥", status: "Styling Hair", ego: 95, icon: "⚔️" },
-      { name: "Jay ⚡", status: "Rage-Quitting Gaming", ego: 80, icon: "🎮" },
-      { name: "Zane ❄️", status: "Updating Firmware", ego: 40, icon: "🤖" },
-      { name: "Cole 🪨", status: "Eating Whole Cake", ego: 65, icon: "🍰" },
-      { name: "Lloyd 🟢", status: "In Master Training", ego: 70, icon: "🐉" },
-      { name: "Dareth 🤎", status: "Claiming He Is 7th Ninja", ego: 100, icon: "🏆" }
-    ];
-
-    function renderChars() {
-      const grid = document.getElementById('charGrid');
-      grid.innerHTML = '';
-      charData.forEach(c => {
-        grid.innerHTML += `
-          <div class="char-card">
-            <div class="char-avatar">${c.icon}</div>
-            <div class="char-name">${c.name}</div>
-            <div class="char-status">📍 ${c.status}</div>
-            <div style="font-size: 0.8rem; color: var(--text-muted)">Ego Level: ${c.ego}%</div>
-            <div class="ego-bar-bg">
-              <div class="ego-bar-fill" style="width: ${c.ego}%"></div>
-            </div>
-          </div>
-        `;
-      });
-    }
-
-    // Arcade Game Engine
-    const canvas = document.getElementById('gameCanvas');
-    const ctx = canvas.getContext('2d');
-    let gameRunning = false;
-    let score = 0;
-    let lives = 3;
-    let targets = [];
-
-    const villainTypes = ['🐍', '🤖', '👻', '💣'];
-
-    document.getElementById('startGameBtn').onclick = () => {
-      score = 0;
-      lives = 3;
-      targets = [];
-      gameRunning = true;
-      playSound('score');
-      spawnTarget();
-    };
-
-    function spawnTarget() {
-      if (!gameRunning) return;
-      const type = villainTypes[Math.floor(Math.random() * villainTypes.length)];
-      targets.push({
-        x: Math.random() * (canvas.width - 60) + 30,
-        y: canvas.height + 30,
-        vy: - (Math.random() * 4 + 7),
-        vx: (Math.random() - 0.5) * 3,
-        type: type,
-        radius: 25
-      });
-      setTimeout(spawnTarget, Math.random() * 1000 + 800);
-    }
-
-    canvas.addEventListener('mousemove', (e) => {
-      if (!gameRunning) return;
-      const rect = canvas.getBoundingClientRect();
-      const mouseX = e.clientX - rect.left;
-      const mouseY = e.clientY - rect.top;
-
-      targets.forEach((t, index) => {
-        const dist = Math.hypot(t.x - mouseX, t.y - mouseY);
-        if (dist < t.radius) {
-          if (t.type === '💣') {
-            lives--;
-            playSound('slash');
-            if (lives <= 0) gameRunning = false;
-          } else {
-            score += 100;
-            playSound('slash');
-          }
-          targets.splice(index, 1);
-        }
-      });
-    });
-
-    function gameLoop() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      if (gameRunning) {
-        targets.forEach((t, i) => {
-          t.x += t.vx;
-          t.y += t.vy;
-          t.vy += 0.15; // Gravity
-
-          ctx.font = '30px serif';
-          ctx.textAlign = 'center';
-          ctx.fillText(t.type, t.x, t.y);
-
-          if (t.y > canvas.height + 50) {
-            targets.splice(i, 1);
-            if (t.type !== '💣') lives--;
-            if (lives <= 0) gameRunning = false;
-          }
-        });
-
-        // HUD
-        ctx.fillStyle = '#00f0ff';
-        ctx.font = 'bold 20px Rajdhani';
-        ctx.textAlign = 'left';
-        ctx.fillText(`SCORE: ${score}`, 20, 35);
-        ctx.fillText(`LIVES: ${'❤️'.repeat(Math.max(0, lives))}`, 20, 65);
-      } else {
-        ctx.fillStyle = '#ff1e43';
-        ctx.font = 'bold 32px Bebas Neue';
-        ctx.textAlign = 'center';
-        ctx.fillText(score > 0 ? `GAME OVER! FINAL SCORE: ${score}` : "CLICK 'START GAME' TO SLICE VILLAINS!", canvas.width / 2, canvas.height / 2);
-      }
-
-      requestAnimationFrame(gameLoop);
-    }
-
-    // Init Page
-    renderGossip();
-    renderChars();
-    gameLoop();
-  </script>
-</body>
-</html>
+      const item
